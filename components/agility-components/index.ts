@@ -4,6 +4,7 @@ import PostsListing from "./PostsListing/PostsListing.server";
 import PostDetails from "./PostDetails";
 import Heading from "./Heading";
 import TextBlockWithImage from "./TextBlockWithImage";
+import HeroBanner from "./HeroBanner";
 import NoComponentFound from "./NoComponentFound";
 
 
@@ -17,6 +18,7 @@ const allModules = [
 	{ name: "PostsListing", module: PostsListing },
 	{ name: "PostDetails", module: PostDetails },
 	{ name: "RichTextArea", module: RichTextArea },
+	{ name: "HeroBanner", module: HeroBanner },
 ];
 
 /**
