@@ -13,7 +13,8 @@ interface IHeroBanner {
   tagline?: string
   buttonPosition: "center" | "bottom" | "below" | "top"
   image: ImageField
-  primaryButton?: URLField
+  primaryCallToAction?: URLField
+  secondaryCallToAction?: URLField
   highPriority?: string
 }
 
@@ -32,7 +33,7 @@ const HeroBanner = async ({
 
   // function to generate proper link
   const generateLink = (url: string, target: string, text: string) => {
-    const buttonClasses = "inline-block px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+    const buttonClasses = "inline-block px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-secondary-500 hover:bg-secondary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
     
     // if relative link, use next/link
     if (isUrlAbsolute(url) === false) {
@@ -85,9 +86,9 @@ const HeroBanner = async ({
   return (
     <div className="relative" data-agility-component={contentID}>
       {/* Hero Banner */}
-      <div className="relative">
+      <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center">
         {/* Background Image */}
-        <div className="w-full" data-agility-field="image">
+        <div  data-agility-field="image">
           <AgilityPic
             image={fields.image}
             className="object-cover object-center w-full"
@@ -111,7 +112,7 @@ const HeroBanner = async ({
             {fields.tagline && (
               <div
                 data-agility-field="tagline"
-                className="font-bold text-sm uppercase py-1 text-white hidden md:block"
+                className="font-bold text-sm uppercase py-1 text-white"
               >
                 {fields.tagline}
               </div>
@@ -127,33 +128,27 @@ const HeroBanner = async ({
             )}
 
             {/* Button - responsive positioning */}
-            {fields.primaryButton && (
-              <div className={`mt-8 ${
-                // On mobile, position based on buttonPosition
-                fields.buttonPosition === "top" ? "md:mt-8" : "md:mt-8"
-              }`}>
+            {fields.primaryCallToAction && (
+              <div className={`mt-8 md:mt-8`}>
                 {generateLink(
-                  fields.primaryButton.href,
-                  fields.primaryButton.target,
-                  fields.primaryButton.text
+                  fields.primaryCallToAction.href,
+                  fields.primaryCallToAction.target,
+                  fields.primaryCallToAction.text
+                )}
+              </div>
+            )}
+            {fields.secondaryCallToAction && (
+              <div className={`mt-8 md:mt-8`}>
+                {generateLink(
+                  fields.secondaryCallToAction.href,
+                  fields.secondaryCallToAction.target,
+                  fields.secondaryCallToAction.text
                 )}
               </div>
             )}
           </div>
         </div>
       </div>
-
-      {/* Tagline below banner on mobile */}
-      {fields.tagline && (
-        <div className="block md:hidden px-8 py-4 text-center">
-          <div
-            data-agility-field="tagline"
-            className="font-bold text-primary-500 text-sm uppercase"
-          >
-            {fields.tagline}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
