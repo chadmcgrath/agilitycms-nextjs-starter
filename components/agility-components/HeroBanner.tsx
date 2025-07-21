@@ -131,7 +131,7 @@ const HeroBanner = async ({
 
       {/* DESKTOP LAYOUT */}
       <div className="hidden md:block">
-        <div className="relative max-w-screen-xl mx-auto py-20 md:py-24">
+        <div className="relative py-20 md:py-24">
           {/* Desktop: Background Image */}
           <div data-agility-field="image">
             <Link href={fields.primaryCallToAction?.href || "/"} className="relative">
