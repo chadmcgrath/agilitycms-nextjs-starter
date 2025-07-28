@@ -32,7 +32,7 @@ const HeroBanner = async ({
 
   // function to generate proper link
   const generateLink = (fieldName: string, url: string, target: string, text: string) => {
-    const buttonClasses = "inline-block px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-secondary-500 hover:bg-secondary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150 pointer-events-auto relative z-10"
+    const buttonClasses = "inline-block px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-secondary-500 hover:bg-secondary-700 focus:outline-none focus:border-primary-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150 pointer-events-auto relative z-30"
 
     // if relative link, use next/link
     if (isUrlAbsolute(url) === false) {
@@ -68,6 +68,10 @@ const HeroBanner = async ({
 
   return (
     <div className="relative cursor-pointer group" data-agility-component={contentID}>
+      {/* Invisible clickable overlay */}
+      <Link href={fields.primaryCallToAction?.href || "/"} className="absolute inset-0 z-20">
+        <span className="sr-only">Navigate to {fields.primaryCallToAction?.text || "main content"}</span>
+      </Link>
       {/* Title/tagline - Mobile: above image, Desktop: overlay */}
       <div className="text-center px-8 py-8 bg-black bg-opacity-40 md:absolute md:inset-0 md:flex md:flex-col md:items-center md:justify-center md:bg-transparent md:z-10">
         <div className="md:max-w-4xl md:mx-auto md:px-8">
@@ -92,19 +96,17 @@ const HeroBanner = async ({
 
       {/* Image container */}
       <div className="relative md:py-20 md:py-24" data-agility-field="image">
-        <Link href={fields.primaryCallToAction?.href || "/"} className="relative">
-          <AgilityPic
-            image={fields.image}
-            className="object-cover object-center w-full"
-            priority={priority}
-            fallbackWidth={1200}
-            sources={[
-              { media: "(max-width: 767px)", width: 768 },
-              { media: "(min-width: 1280px)", width: 1280 },
-              { media: "(min-width: 768px)", width: 1024 },
-            ]}
-          />
-        </Link>
+        <AgilityPic
+          image={fields.image}
+          className="object-cover object-center w-full"
+          priority={priority}
+          fallbackWidth={1200}
+          sources={[
+            { media: "(max-width: 767px)", width: 768 },
+            { media: "(min-width: 1280px)", width: 1280 },
+            { media: "(min-width: 768px)", width: 1024 },
+          ]}
+        />
         <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition-opacity duration-300"></div>
       </div>
 
