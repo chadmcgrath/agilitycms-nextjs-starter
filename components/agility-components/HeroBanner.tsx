@@ -69,8 +69,8 @@ const HeroBanner = async ({
   return (
     <div className="relative cursor-pointer group" data-agility-component={contentID}>
       {/* Title/tagline - Mobile: above image, Desktop: overlay */}
-      <div className="text-center px-8 py-8 bg-black bg-opacity-40 md:absolute md:inset-0 md:flex md:flex-col md:items-center md:justify-center md:bg-transparent md:pointer-events-none md:z-10">
-        <div className="md:max-w-4xl md:mx-auto">
+      <div className="text-center px-8 py-8 bg-black bg-opacity-40 md:absolute md:inset-0 md:flex md:flex-col md:items-center md:justify-center md:bg-transparent md:z-10">
+        <div className="md:max-w-4xl md:mx-auto md:px-8">
           {fields.tagline && (
             <div
               data-agility-field="tagline"
@@ -86,25 +86,6 @@ const HeroBanner = async ({
             >
               {fields.title}
             </h1>
-          )}
-          {/* Desktop buttons */}
-          {(fields.primaryCallToAction || fields.secondaryCallToAction) && (
-            <div className="mt-8 flex-row gap-4 justify-center hidden md:flex">
-              {fields.primaryCallToAction &&
-                generateLink(
-                  "primaryCallToAction",
-                  fields.primaryCallToAction.href,
-                  fields.primaryCallToAction.target,
-                  fields.primaryCallToAction.text
-                )}
-              {fields.secondaryCallToAction &&
-                generateLink(
-                  "secondaryCallToAction",
-                  fields.secondaryCallToAction.href,
-                  fields.secondaryCallToAction.target,
-                  fields.secondaryCallToAction.text
-                )}
-            </div>
           )}
         </div>
       </div>
@@ -127,10 +108,10 @@ const HeroBanner = async ({
         <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition-opacity duration-300"></div>
       </div>
 
-      {/* Mobile buttons below image */}
+      {/* Buttons - Mobile: below image, Desktop: overlay using absolute positioning */}
       {(fields.primaryCallToAction || fields.secondaryCallToAction) && (
-        <div className="text-center px-8 py-8 bg-black bg-opacity-40 md:hidden">
-          <div className="flex flex-col gap-4 items-center">
+        <div className="text-center px-8 py-8 bg-black bg-opacity-40 md:absolute md:inset-0 md:flex md:items-center md:justify-center md:bg-transparent md:z-10 md:top-auto md:bottom-16">
+          <div className="flex flex-col md:flex-row gap-4 items-center md:max-w-4xl md:mx-auto">
             {fields.primaryCallToAction &&
               generateLink(
                 "primaryCallToAction",
